@@ -28,6 +28,7 @@ Every entry records a deliberate implementation or release choice and its reason
 - **App version starts at `1.0.0+1`.** The initial release has an explicit Play-compatible version that can be incremented for each upload.
 - **The Gradle bootstrap uses the pinned 8.13 distribution rather than an arbitrary system Gradle.** This keeps AGP 8.13 builds deterministic across Android hosts.
 - **Live AdMob units and Play Games leaderboard IDs start empty; SDK loaders skip them safely.** This keeps account-dependent features inert instead of shipping fake or unresolved IDs.
+- **A dependency-free browser harness mirrors the core timing loop for quick playtests, but stays outside the Android release.** This gives immediate interaction feedback without implying web-platform support or substituting for Android verification.
 
 ## Later implementation choices
 
