@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090c19">
+  <title>ORBIT HOP — Gameplay Playtest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <aside class="side side-left" aria-label="How to play">
+      <a class="wordmark" href="#" aria-label="ORBIT HOP playtest home">
+        <span class="wordmark-orbit" aria-hidden="true"><i></i><b></b></span>
+        <span><strong>ORBIT HOP</strong><small>GAMEPLAY PLAYTEST</small></span>
+      </a>
+      <div class="side-copy">
+        <span class="eyebrow">ONE TAP. ONE ORBIT.</span>
+        <h1>Catch the<br><em>perfect</em> moment.</h1>
+        <p>Your blob circles a planet. Tap to launch along its orbit and land on the next one. Timing the glowing gate earns a perfect.</p>
+      </div>
+      <div class="hint-card">
+        <span class="hint-icon" aria-hidden="true">↗</span>
+        <div><strong>Tap or click</strong><small>Spacebar works too</small></div>
+      </div>
+      <div class="legend">
+        <span><i class="dot dot-cyan"></i>Orbiting</span>
+        <span><i class="dot dot-gold"></i>Perfect window</span>
+        <span><i class="dot dot-pink"></i>Danger rising</span>
+      </div>
+      <p class="side-note">A browser playtest of the core timing loop.<br>Mobile-friendly · no install · no sign-in</p>
+    </aside>
+
+    <section class="game-column" aria-label="ORBIT HOP game">
+      <div class="device-frame" id="stage">
+        <canvas id="game" aria-label="Tap to launch your blob between orbiting planets"></canvas>
+        <header class="hud-top">
+          <div class="brand-mini"><span class="mini-star">✦</span> ORBIT HOP</div>
+          <button class="icon-button" id="pauseButton" type="button" aria-label="Pause game" title="Pause">Ⅱ</button>
+          <div class="score-block"><small>PLANETS</small><strong id="score">0</strong></div>
+        </header>
+        <div class="hud-combo" id="comboBadge">✦ <span id="combo">0</span> COMBO</div>
+        <div class="fever-badge" id="feverBadge">FEVER · ×2</div>
+        <div class="hud-bottom">
+          <div class="currency"><span class="coin-icon">●</span><span id="coins">0</span><small>RUN COINS</small></div>
+          <div class="tap-hint" id="tapHint"><span class="pulse-dot"></span> TAP TO LAUNCH</div>
+        </div>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <div class="overlay-kicker" id="overlayKicker">A LITTLE SPACE. A LOT OF TIMING.</div>
+            <h2 id="overlayTitle">Ready to<br><em>orbit?</em></h2>
+            <p id="overlayText">Tap to launch from the planet. Land on the next orbit and see how far your blob can hop.</p>
+            <button class="primary-button" id="overlayButton" type="button">START PLAYTEST <span>↗</span></button>
+            <div class="overlay-foot" id="overlayFoot">CLICK OR TAP · SPACEBAR ALSO WORKS</div>
+          </div>
+        </div>
+        <div class="toast" id="toast" aria-live="polite"></div>
+      </div>
+      <div class="under-stage"><span><i class="live-dot"></i> PLAYTEST BUILD</span><span id="phaseLabel">READY</span><span>BEST <b id="bestScore">0</b></span></div>
+    </section>
+
+    <aside class="side side-right" aria-label="Playtest notes">
+      <div class="playtest-head"><span class="eyebrow">QUICK TEST</span><h2>Find your<br>rhythm.</h2></div>
+      <div class="test-steps">
+        <div class="step"><b>01</b><span><strong>Watch the orbit</strong><small>The blob sweeps around the planet. A gold glint marks the ideal launch angle.</small></span></div>
+        <div class="step"><b>02</b><span><strong>Tap to launch</strong><small>Launch near the glint for a perfect landing and a growing combo.</small></span></div>
+        <div class="step"><b>03</b><span><strong>Keep moving</strong><small>Planets shift, hazards appear, and the danger line rises. Don't wait too long.</small></span></div>
+      </div>
+      <div class="playtest-stats">
+        <div><small>STATE</small><strong id="stateReadout">TITLE</strong></div>
+        <div><small>LAST RUN</small><strong id="lastRun">—</strong></div>
+      </div>
+      <button class="reset-button" id="resetButton" type="button">↻ &nbsp; RESTART PLAYTEST</button>
+      <p class="disclaimer">This preview recreates the core gameplay loop in a lightweight browser harness. Android-only integrations and device features aren't active here.</p>
+    </aside>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

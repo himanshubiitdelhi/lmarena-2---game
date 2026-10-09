@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+set -eu
+
+GRADLE_VERSION=8.13
+GRADLE_HOME_DIR="${GRADLE_USER_HOME:-${HOME}/.gradle}/wrapper/dists/gradle-${GRADLE_VERSION}-bin/orbit-hop"
+GRADLE_BIN="${GRADLE_HOME_DIR}/gradle-${GRADLE_VERSION}/bin/gradle"
+
+matches_pinned_version() {
+  candidate="$1"
+  detected_version="$("$candidate" --version 2>/dev/null | sed -n '1s/^Gradle //p' | tr -d '\r')"
+  [ "$detected_version" = "$GRADLE_VERSION" ]
+}
+
+if [ -n "${GRADLE_HOME:-}" ] && [ -x "${GRADLE_HOME}/bin/gradle" ] && \
+  matches_pinned_version "${GRADLE_HOME}/bin/gradle"; then
+  exec "${GRADLE_HOME}/bin/gradle" "$@"
+fi
+if command -v gradle >/dev/null 2>&1 && matches_pinned_version "$(command -v gradle)"; then
+  exec gradle "$@"
+fi
+if [ ! -x "$GRADLE_BIN" ]; then
+  mkdir -p "$GRADLE_HOME_DIR"
+  ARCHIVE="${GRADLE_HOME_DIR}/gradle-${GRADLE_VERSION}-bin.zip"
+  if command -v curl >/dev/null 2>&1; then
+    curl --fail --location --retry 3 --silent --show-error \
+      "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+      --output "$ARCHIVE"
+  elif command -v wget >/dev/null 2>&1; then
+    wget --tries=3 --quiet \
+      "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+      --output-document="$ARCHIVE"
+  else
+    echo "Gradle ${GRADLE_VERSION} is missing. Install Gradle or add curl/wget to PATH." >&2
+    exit 1
+  fi
+  if ! command -v unzip >/dev/null 2>&1; then
+    echo "The Gradle distribution was downloaded, but unzip is required." >&2
+    exit 1
+  fi
+  unzip -q -o "$ARCHIVE" -d "$GRADLE_HOME_DIR"
+  rm -f "$ARCHIVE"
+fi
+exec "$GRADLE_BIN" "$@"

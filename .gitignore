@@ -1,0 +1,32 @@
+# Flutter/Dart build output
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+coverage/
+
+# Android/Gradle generated files and signing secrets
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/google-services.json
+android/app/src/main/res/values/google-services.xml
+android/app/*.jks
+android/app/*.keystore
+*.jks
+*.keystore
+*.aab
+*.apk
+
+# Firebase local and generated configuration
+firebase_app_id_file.json
+GoogleService-Info.plist
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
