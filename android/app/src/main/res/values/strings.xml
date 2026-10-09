@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ORBIT HOP</string>
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="play_games_app_id">0</string>
+</resources>
